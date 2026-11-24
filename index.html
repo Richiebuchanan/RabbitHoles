@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rabbit Holes | Richie Buchanan</title>
+<meta name="description" content="Questions I went down, tools I built on the way, and what I have found so far.">
+<link rel="canonical" href="https://richiebuchanan.github.io/RabbitHoles/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rabbit Holes | Richie Buchanan">
+<meta property="og:description" content="Questions I went down, tools I built on the way, and what I have found so far.">
+<meta property="og:url" content="https://richiebuchanan.github.io/RabbitHoles/">
+<meta property="og:image" content="https://richiebuchanan.github.io/RabbitHoles/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--ground:#F2F4F1;--grid:#DDE3E0;--ink:#16202B;--muted:#4A5562;--blue:#1D4E89;--blue-d:#12325A;--line:#C3CCD4;--amber:#8A4200;--mono:'IBM Plex Mono',ui-monospace,monospace;--head:'Space Grotesk',system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--ground);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;line-height:1.5}
+a{color:var(--blue)}a:hover{color:var(--blue-d)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:56px 24px;display:flex;flex-direction:column;gap:40px}
+.mono{font-family:var(--mono)}
+header.top{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-end}
+header.top .lead{flex:1 1 520px;display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.04em}
+h1{margin:0;font-family:var(--head);font-size:clamp(56px,11vw,96px);line-height:.95;letter-spacing:-.03em}
+.tagline{margin:0;font-family:var(--head);font-weight:500;font-size:clamp(19px,2.6vw,24px);line-height:1.25;color:var(--blue)}
+.intro{flex:0 1 380px;margin:0;font-size:16px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font-family:var(--mono);font-size:13px;min-height:44px;padding:0 16px;background:#fff;color:var(--ink);border:1px solid var(--line);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.card{background:#fff;border:1px solid var(--line);padding:24px;display:flex;flex-direction:column;gap:12px}
+.card .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.pill{padding:3px 10px;border-radius:999px;border:1px solid var(--blue);background:var(--blue);color:#fff}
+.pill.Learning{background:#fff;color:var(--amber);border-color:var(--amber)}
+.pill.Tool{background:#fff;color:var(--blue);border-color:var(--blue)}
+.card h2{margin:0;font-family:var(--head);font-size:24px;line-height:1.15}
+.card .q{margin:0;font-size:16px;line-height:1.4;font-weight:500;color:var(--blue)}
+.card .d{margin:0;font-size:14px;color:var(--muted)}
+.card .tk{border-top:1px dashed #9AA6B2;padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.card .tk span{font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+.card .tk p{margin:0;font-size:14px}
+.card .foot{margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 12px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.card .foot a{display:inline-block;padding:12px 0;font-weight:500;white-space:nowrap}
+.dark{background:var(--ink);color:#fff;padding:28px 32px;display:flex;flex-direction:column;gap:14px}
+.dark .label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#C9D6E2}
+.dark p{margin:0;font-size:15px}
+.dark .when{font-family:var(--mono);color:#C9D6E2;margin-right:12px;white-space:nowrap}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.panel{background:#fff;border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;gap:12px}
+.panel h2{margin:0;font-family:var(--head);font-size:24px}
+.panel p{margin:0;font-size:15px;color:var(--ink)}
+.panel ol{margin:0;padding-left:20px;font-size:15px;display:flex;flex-direction:column;gap:6px}
+.btn{align-self:flex-start;display:inline-block;padding:12px 18px;background:var(--blue);color:#fff;text-decoration:none;font-family:var(--mono);font-size:13px}
+.btn:hover{background:var(--blue-d);color:#fff}
+footer{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;font-size:14px;color:var(--muted)}
+@media (max-width:560px){.wrap{padding:36px 16px;gap:32px}.dark{padding:24px 20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="lead">
+    <span class="eyebrow">RICHIE BUCHANAN</span>
+    <h1>Rabbit Holes</h1>
+    <p class="tagline">Questions I went down, tools I built on the way, and what I have found so far.</p>
+  </div>
+  <p class="intro">Each site here started as one question I could not leave alone. A pipeline gathers sources on a schedule, weighs them, and updates a plain-language conclusion. This page shows where each one stands today.</p>
+</header>
+
+<nav class="chips" id="chips" aria-label="Filter sites by kind"></nav>
+
+<main class="grid" id="grid" aria-live="polite"></main>
+
+<section class="dark" aria-labelledby="chg-h">
+  <span class="label" id="chg-h">WHAT CHANGED RECENTLY</span>
+  <div id="changes" style="display:flex;flex-direction:column;gap:14px"></div>
+</section>
+
+<section class="two">
+  <div class="panel" id="method">
+    <h2>How these are built</h2>
+    <p>Every site follows the same method, built together with Claude, Anthropic's AI model.</p>
+    <ol>
+      <li><strong>Scheduled research.</strong> A recurring task searches a fixed list of sources and watchlists.</li>
+      <li><strong>Scoring.</strong> Each item is graded for relevance and for how strong its evidence is.</li>
+      <li><strong>Sourced analysis.</strong> Conclusions are rewritten only when the evidence clears a set bar, and every claim links to its source.</li>
+      <li><strong>One database.</strong> Each site is a set of static pages reading from a shared Postgres database, so pages update themselves.</li>
+    </ol>
+    <p>The takeaways, counts and dates on this page are read live from that same database.</p>
+  </div>
+  <div class="panel" id="about">
+    <h2>About</h2>
+    <p>I'm Richie Buchanan, a senior data analyst in Tennessee with more than ten years in insurance, healthcare and operations analytics, and a former teacher.</p>
+    <p>I build these because I'd rather track a question properly than keep wondering about it. If one of them is useful to you, or you want to talk about how they work, get in touch.</p>
+    <a class="btn" href="mailto:richiebuchanan@gmail.com?subject=Rabbit%20Holes">Email me</a>
+  </div>
+</section>
+
+<footer>
+  <span>Built and maintained by Richie Buchanan. Sources are cited on each site.</span>
+  <span>Nothing here is professional advice.</span>
+</footer>
+</div>
+
+<script>
+(function () {
+  var API = 'https://acxdvzcohjayvmqdaoke.supabase.co/rest/v1/';
+  var KEY = 'sb_publishable_2n567u9zKgZ-L-M_yGRf5Q_HEV_p1-f';
+
+  // Shown immediately, and kept if the database cannot be reached.
+  var sites = [
+    {slug:'surety',name:'Surety Market Intelligence',kind:'Tracker',question:'What is moving in the surety market right now?',descriptor:'Daily tracking of surety news, broker and producer activity, and industry podcasts, scored for underwriting relevance.',url:'https://richiebuchanan.github.io/SuretyMarketIntelligence/overview.html',takeaway:'Surety capacity is changing hands through the CopperPoint and Liberty Mutual deals while carrier results stay strong. Demand is turning uneven: contractor backlog fell to 8.1 months and homebuilder sentiment hit a 14-year low.',stat:'2,684 articles scored',last_run:'2026-11-23T17:44:54Z'},
+    {slug:'longevity',name:'Longevity News',kind:'Tracker',question:'What actually helps people live longer, and what is noise?',descriptor:'A research and media tracker that grades every intervention on two questions: does it work, and does it hurt?',url:'https://richiebuchanan.github.io/LongevityNews/',takeaway:'The big levers have not moved: not smoking, fitness and the other settled basics still dwarf anything on the frontier. The latest 14 studies were all animal, lab or observational, so no graded conclusion changed.',stat:'174 studies · 61 interventions graded',last_run:'2026-11-23T16:23:50Z'},
+    {slug:'phase',name:'Phase Transition',kind:'Tracker',question:'Is the AI boom a breakthrough, a bubble, or both?',descriptor:'A plain-language record of AI developments since January 2023: the discoveries, the risks and the upside.',url:'https://richiebuchanan.github.io/PhaseTransition/',takeaway:'AI is producing real, checked results in math and medicine, and is measurably speeding up AI research. No rogue AI has been caught, but there are early warning signs. Bubble risk is real, not confirmed.',stat:'319 timeline entries',last_run:'2026-11-23T21:26:55Z'},
+    {slug:'alamo',name:'Alamo Watch',kind:'Tracker',question:'Where should the second home go, and what is being built nearby?',descriptor:'A news desk and data center tracker for the Dale Hollow to Big South Fork region, plus the family plan it supports.',url:'https://richiebuchanan.github.io/AlamoWatch/',takeaway:'The first data center inside the search counties has turned up, in Overton County. Jackson and Cumberland counties both have moratoriums in place.',stat:'45 data center projects · 29 counties',last_run:'2026-11-17T15:59:05Z'},
+    {slug:'four-plays',name:'Four Plays',kind:'Learning',question:'What are these four plays really about?',descriptor:'A study guide to Death of a Salesman, A Raisin in the Sun, Trifles and The Sandbox, with scene summaries and practice.',url:null,takeaway:'All four plays are about people the world has stopped valuing, and the dreams their families hold on to anyway.',stat:'4 plays covered',last_run:null}
+  ];
+  var changes = [
+    {change_date:'2026-11-23',site:'Phase Transition',change:'Reviewed all five questions on Nov 23 (scheduled full refresh). No readings changed.'},
+    {change_date:'2026-11-23',site:'Surety Market Intelligence',change:'New six-week analysis covering 10/12-11/23, 2026, drawn from 252 articles.'},
+    {change_date:'2026-11-17',site:'Alamo Watch',change:'A data center turns up in Overton County, and Jackson County is on pause'},
+    {change_date:'2026-11-17',site:'Longevity News',change:'State of the Science version 7: Scheduled full-site refresh'}
+  ];
+  var filter = 'All';
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function shortDate(v) {
+    if (!v) return '';
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(v));
+    return m ? MONTHS[+m[2] - 1] + ' ' + (+m[3]) : '';
+  }
+  function safeUrl(u) { return typeof u === 'string' && /^https:\/\//.test(u) ? u : null; }
+  function plural(k) { return k === 'Learning' ? 'Learning' : k + 's'; }
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function renderChips() {
+    var box = document.getElementById('chips');
+    box.textContent = '';
+    var kinds = [];
+    sites.forEach(function (s) { if (kinds.indexOf(s.kind) < 0) kinds.push(s.kind); });
+    [['All', 'All ' + sites.length]].concat(kinds.map(function (k) { return [k, plural(k)]; })).forEach(function (c) {
+      var b = el('button', null, c[1]);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(filter === c[0]));
+      b.addEventListener('click', function () { filter = c[0]; renderChips(); renderCards(); });
+      box.appendChild(b);
+    });
+  }
+
+  function renderCards() {
+    var grid = document.getElementById('grid');
+    grid.textContent = '';
+    sites.forEach(function (s, i) {
+      if (filter !== 'All' && s.kind !== filter) return;
+      var card = el('article', 'card');
+      var meta = el('div', 'meta');
+      meta.appendChild(el('span', null, 'Hole No. ' + pad(i + 1)));
+      meta.appendChild(el('span', 'pill ' + (s.kind || '').replace(/[^A-Za-z]/g, ''), s.kind));
+      card.appendChild(meta);
+      card.appendChild(el('h2', null, s.name));
+      card.appendChild(el('p', 'q', s.question));
+      card.appendChild(el('p', 'd', s.descriptor));
+      if (s.takeaway) {
+        var tk = el('div', 'tk');
+        tk.appendChild(el('span', null, 'WHAT I HAVE FOUND SO FAR'));
+        tk.appendChild(el('p', null, s.takeaway));
+        card.appendChild(tk);
+      }
+      var foot = el('div', 'foot');
+      var d = shortDate(s.last_run);
+      foot.appendChild(el('span', null, [s.stat, d ? 'updated ' + d : (s.slug === 'four-plays' ? 'static guide' : '')].filter(Boolean).join(' · ')));
+      var u = safeUrl(s.url);
+      if (u) {
+        var a = el('a', null, 'Visit site →');
+        a.href = u;
+        a.setAttribute('aria-label', 'Visit ' + s.name);
+        foot.appendChild(a);
+      } else {
+        foot.appendChild(el('span', null, 'Link coming soon'));
+      }
+      card.appendChild(foot);
+      grid.appendChild(card);
+    });
+  }
+
+  function renderChanges() {
+    var box = document.getElementById('changes');
+    box.textContent = '';
+    changes.slice(0, 4).forEach(function (c) {
+      var p = el('p');
+      p.appendChild(el('span', 'when', shortDate(c.change_date)));
+      p.appendChild(document.createTextNode(c.site + ': ' + c.change));
+      box.appendChild(p);
+    });
+  }
+
+  function get(path) {
+    return fetch(API + path, { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+
+  renderChips(); renderCards(); renderChanges();
+
+  get('rabbit_holes_directory?select=*&order=sort_order').then(function (rows) {
+    if (Array.isArray(rows) && rows.length) { sites = rows; renderChips(); renderCards(); }
+  }).catch(function () {});
+  get('rabbit_holes_changes?select=*&order=change_date.desc').then(function (rows) {
+    if (Array.isArray(rows) && rows.length) { changes = rows; renderChanges(); }
+  }).catch(function () {});
+})();
+</script>
+</body>
+</html>
